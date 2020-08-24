@@ -72,8 +72,9 @@
         $item = new MercadoPago\Item();
         $item->id = '1234';
         $item->title = $_POST['title'];
-        $item->description = 'Dispositivo móvil de Tienda e-commerce​';
-        $item->picture_url = $_SERVER['SERVER_NAME'] . $_POST['img'];
+        $image_url = "https://enzogeron-mp-commerce-php.herokuapp.com" . $_POST['img'];
+        $item->picture_url = $image_url;
+        $item->description = "Dispositivo móvil de Tienda e-commerce";
         $item->quantity = 1;
         $item->unit_price = $_POST['price'];
         
@@ -103,9 +104,7 @@
 
         $preference->save();
 
-    // https://www.tusitio.com/success.php?collection_id=[PAYMENT_ID]&collection_status=approved&external_ref
-//erence=[EXTERNAL_REFERENCE]&payment_type=credit_card&preference_id=[PREFERENCE_ID]&site_id
-//=[SITE_ID]&processing_mode=aggregator&merchant_account_id=null
+    // https://www.mercadopago.com/org-img/MP3/home/logomp3.gif
 
     ?>
 
@@ -157,7 +156,7 @@
                                 <div class="as-producttile-tilehero with-paddlenav " style="float:left;">
                                     <div class="as-dummy-container as-dummy-img">
 
-                                        <img src="./assets/wireless-headphones" class="ir ir item-image as-producttile-image  " style="max-width: 70%;max-height: 70%;"alt="" width="445" height="445">
+                                        <img src="<?php echo $image_url; ?>" class="ir ir item-image" style="max-width: 70%;max-height: 70%;"alt="" width="445" height="445">
                                     </div>
                                     <div class="images mini-gallery gal5 ">
                                     
@@ -166,7 +165,7 @@
                                             <div class="clearfix image-list xs-no-js as-util-relatedlink relatedlink" data-relatedlink="6|Powerbeats3 Wireless Earphones - Neighborhood Collection - Brick Red|MPXP2">
                                                 <div class="as-tilegallery-element as-image-selected">
                                                     <div class=""></div>
-                                                    <img src="./assets/003.jpg" class="ir ir item-image as-producttile-image" alt="" width="445" height="445" style="content:-webkit-image  -set(url(<?php echo $_POST['img'] ?>) 2x);">
+                                                    <img src="<?php echo $image_url; ?>" class="ir ir item-image" alt="" width="245" height="245">
                                                 </div>
                                                 
                                             </div>
@@ -196,7 +195,6 @@
                                             <?php echo "$" . $_POST['unit'] ?>
                                         </h3>
                                     </div>
-                                    
                                     <form action="<?php echo $preference->init_point; ?>">
                                         <button type="submit" class="mercadopago-button" formmethod="post">Pagar la compra</button>
                                     </form>
